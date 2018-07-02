@@ -1,5 +1,7 @@
 # InkTestWpf
 Windowsの手書き認識APIを利用した，手書きノートのデモアプリ  
+https://ydkk.hateblo.jp/entry/2018/07/02/154033
+
 ![](https://cdn-ak.f.st-hatena.com/images/fotolife/Y/YDKK/20180628/20180628160517.png)
 
 ## Demo
