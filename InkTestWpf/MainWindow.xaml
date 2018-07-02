@@ -1,0 +1,90 @@
+﻿<Window x:Class="InkTestWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:InkTestWpf"
+        x:Name="root"
+        Title="MainWindow"
+        Width="1050"
+        Height="700"
+        Closing="root_Closing"
+        Loaded="root_Loaded"
+        SizeChanged="root_SizeChanged">
+    <DockPanel x:Name="rootDock">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <ToggleButton x:Name="OCRButton"
+                          Width="150"
+                          Height="80"
+                          Margin="10,0,5,0"
+                          Click="InkButton_Click"
+                          Content="文字"
+                          FontSize="48"
+                          IsChecked="True" />
+            <ToggleButton x:Name="TegakiButton"
+                          Width="150"
+                          Height="80"
+                          Margin="5,0,5,0"
+                          Checked="TextButton_Checked"
+                          Content="手書き"
+                          FontSize="48" />
+            <Button x:Name="SaveButton"
+                    Width="100"
+                    Height="80"
+                    Margin="30,0,5,0"
+                    Click="SaveButton_Click"
+                    Content="保存"
+                    FontSize="48" />
+            <Button x:Name="LoadButton"
+                    Width="100"
+                    Height="80"
+                    Margin="5,0,5,0"
+                    Click="LoadButton_Click"
+                    Content="読込"
+                    FontSize="48" />
+            <Button x:Name="SettingButton"
+                    Width="100"
+                    Height="80"
+                    Margin="30,0,5,0"
+                    Click="SettingButton_Click"
+                    Content="設定"
+                    FontSize="48" />
+            <Label VerticalAlignment="Center" Content="認識エンジン：" />
+            <ListBox x:Name="EngineList"
+                     Height="80"
+                     DisplayMemberPath="Name"
+                     SelectedValuePath="Guid" />
+
+        </StackPanel>
+        <TabControl Name="TabControl1" Margin="0,3,0,0" Width="{Binding Width, ElementName=root}" Height="27" DockPanel.Dock="Top"
+                    SelectionChanged="TabControl1_SelectionChanged"/>
+        <ScrollViewer x:Name="scrollViewer"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+                    <Grid x:Name="noteRoot" DockPanel.Dock="Bottom">
+                        <StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                    x:Name="gridStack"
+                                    Width="{Binding Width,
+                                                    ElementName=root}"
+                                    Margin="10,5,10,10"
+                                    Panel.ZIndex="-1"
+                                    Background="White" />
+                        <InkCanvas x:Name="OCRCanvas"
+                                   Panel.ZIndex="1"
+                                   Background="Transparent"
+                                   EditingMode="Ink"
+                                   PreviewStylusButtonDown="OCRCanvas_PreviewStylusButtonDown"
+                                   PreviewStylusButtonUp="OCRCanvas_PreviewStylusButtonUp"
+                                   PreviewStylusOutOfRange="OCRCanvas_PreviewStylusUp" />
+                        <InkCanvas x:Name="TegakiCanvas"
+                                   Panel.ZIndex="0"
+                                   Background="Transparent"
+                                   EditingMode="Ink"
+                                   PreviewStylusButtonDown="TegakiCanvas_PreviewStylusButtonDown"
+                                   PreviewStylusButtonUp="TegakiCanvas_PreviewStylusButtonUp"
+                                   PreviewStylusOutOfRange="TegakiCanvas_PreviewStylusOutOfRange"
+                                   SelectionChanged="TegakiCanvas_SelectionChanged" />
+                    </Grid>
+                </ScrollViewer>
+    </DockPanel>
+
+</Window>
